@@ -106,7 +106,7 @@ public class SimpleConfigManager {
             file.getParentFile().mkdirs();
             file.createNewFile();
 
-            if(!resource.isEmpty() && resource != null) {
+            if(resource != null && !resource.isEmpty()) { // iKeirNez fix, swapped the AND statement round to avoid NPE
                 this.copyResource(plugin.getResource(resource), file);
             }
 
