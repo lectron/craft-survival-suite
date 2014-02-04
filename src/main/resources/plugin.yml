@@ -1,0 +1,4 @@
+name: Minecraftly
+author: iKeirNez
+version: ${project.version}
+main: com.iKeirNez.Minecraftly.Minecraftly

@@ -1,0 +1,142 @@
+# This plugin is created and maintained by Minecraftly server and service provider.
+# Server Address: m.ly
+# Official Website: http://m.ly
+# URL Shorterner for Minecraft Community: http://mc.ly
+
+# NEWBIE - Give new player who just joined the server some gift to stay for a period of time.
+Newbie:
+  Enabled: true
+  Command:
+    - pex user {name} add essentials.fly
+    - fly {name}
+  ExpiryCommand:
+    - pex user {name} remove essentials.fly
+    - fly {name}
+# How long does it take for expiry command to take effect?
+  Minutes: 1440
+# Message to player when their newbie gift is given or expired.
+  Message: '&bWelcome to Minecraftly! You have been given free fly ability for 1 day. To receive longer fly ability and $1 for each vote, feel free to vote at &dminecraft.ly'
+  ExpiryMessage: '&bYour introductory fly ability is expired. You can vote for longer fly ability and money at &dminecraft.ly'
+
+
+# CHAT PLUGIN
+Chat:
+  Enabled: true
+# Smart Mute function is a very smart mute function :) This function bypass Essential's /mute command. Players who are muted won't notice they're muted, they can still talk like normal but nobody can see their chat except for themselves
+  SmartMute: true
+# Chat range: How many blocks do you want players to hear somebody talking close by?
+  LocalRange: 32
+  LocalFormat: '{prefix} {player} {suffix}: {message}'
+  GlobalFormat: '{globalprefix} {prefix} {player} {suffix}: {message}'
+  GlobalPrefix: [SHOUT]
+
+BlockServerMessage:
+  Join: true
+  Quit: true
+  Kicked: true
+
+# The plugin will automatically issue the command /restart to restart the server.
+Restart: 
+  Enabled: true
+# Log top voter of all time. Type /vote {page} to see top voter of all time.
+  TopVoter: true
+  Minutes: 720
+# How many seconds do you want the server to count down before restarting?
+  Countdown: 30
+#Countdown message
+  Message: 'Minecraftly automatic daily restart in {countdown} seconds'
+
+#Votifier listener, each vote adds 1 hour of Voter rank and $1 in game money. Console example: /vote {name} to give permission
+Vote:
+  Enabled: true
+#Timed command for each vote. The more a player vote, the more time is given until expire.
+  TimedCommand:
+    - pex user {name} group set Voter
+#Expiry command when the time is up.
+  ExpiryCommand:
+    - pex user {name} group set NonVoter
+#Time for voter rank to have for each vote in minutes
+  Time: 60
+#One time command for each vote
+  OneTimeCommands:
+    - eco give {name} 1
+  ExtraRewards:
+    Vote: 29
+    PerMinutes: 1440
+    OneTimeCommands:
+      - eco give {name} 10
+  Notify: 'Your Voter rank has expired. Receive amazing rewards by voting for Minecraftly at http://minecraft.ly'
+
+# &k format is included in Prefix, Suffix, PrefixFormat, SuffixFormat functions, but excluded from ChatFormat function to prevent annoying chat.
+# Only console can use this function.
+# Console example: /prefix {name} '&bI &eAm &oNotch &kMeow'
+Color:
+  Prefix: true
+  Suffix: true
+  PrefixColor: true
+  SuffixColor: true
+  PrefixFormat: true
+  SuffixFormat: true
+  ChatColor: true
+  ChatFormat: true
+  NameTag: true
+  TablistColor: true
+
+# Use /buy {offeramount} and /sell {offeramount} command to secure buying and selling of land with money
+GriefPrevention:
+  Enabled: true
+  BuyOffer: 'Player {name} offered {money} for the land he/she is standing on that you own. Type /accept to accept the offer'
+  SellOffer: 'Player {name} offered to sell the land he/she is standing on for {money}. Type /accept to accept the offer'
+
+# This function is used to clean permissions data of players with no permissions in Privileges.
+# Currently only work with Privileges permission plugin.
+# Console can run /clean to start cleaning and will notify console when it's done. This function will only perform when server is whitelisted and nobody is on the server. 
+Clean:
+  ExpiryDays: 30
+  Permissions: true
+  GriefPreventionClaims: true
+  GriefPreventionPlayerData: true
+  PlayerData: true
+  Chunks: true
+
+# Limit entities, tiles entities and mobs per chunk
+Limit:
+  Enabled: true
+  EntitiesPerChunk: 10
+  TilesEntitiesPerChunk: 10
+# Item represents item name. Example: There are too many chests 
+  Message: 'There are too many {item}s around this location. To reduce lag, please place your {item} a little bit further away. Thanks!'
+# Mobs will stop spawnning or moving into a chunk if that chunk already reaches mob limit.
+  Animals: 2
+  Villagers: 2
+  Monsters: 2
+
+# This function will give unlimited portable chests by typing /chest {number} to anyone with permission node minecraftly.chest
+Chest:
+  Enabled: true
+
+# Only load chunks in front of players that they can see
+Chunk:
+  Enabled: true
+
+# Use Buycraft API to automatically generate coupon code for a certain player. Console example: /discount {name} {price} {percentage}
+Discount:
+  Enabled: true
+  RedeemLimit: 1
+
+# Maximum height that players can fly up to. This function is used to prevent server and client crashing when somebody fly up very high.
+Height:
+  Enabled: true
+  Limit: 256
+  Message: 'You cannot fly higher than {height} blocks.'
+
+# This function will allow players to rent administrative GriefPrevention subdivisions claims for hourly price.
+# How to use: Type /plot rent while standing inside a region. Permissions node: minecraftly.rent
+Plot:
+  Price: 1
+  Minutes: 60
+# This function will let plot owner enable and disable PVP in their plot by typing /plot pvp
+  PVP: true
+
+#Debug mode. You only need to turn this on to check the plugin for issues/bugs.
+Debug: false
